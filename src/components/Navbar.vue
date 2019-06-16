@@ -34,8 +34,8 @@ export default {
     return {
       drawer: false,
       links: [
-        { icon: "person", text: "Profile", route: "/tasks" },
-        { icon: "dashboard", text: "Dashboard", route: "/" }
+        { icon: "person", text: "Profile", route: "/profile" },
+        { icon: "dashboard", text: "Dashboard", route: "/dashboard" }
       ]
     };
   }

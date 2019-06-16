@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import "../plugins/axios";
 import { mapActions } from "vuex";
 export default {
   data: () => ({
