@@ -11,9 +11,9 @@ export default new Vuex.Store({
     tasks: []
   },
   getters: {
-    getUser: (state) => state.user,
-    getToken: (state) => state.token,
-    getTasks: (state) => state.tasks
+    getUser: state => state.user,
+    getToken: state => state.token,
+    getTasks: state => state.tasks
   },
   actions: {
     setUser: async ({ commit }, user) => {

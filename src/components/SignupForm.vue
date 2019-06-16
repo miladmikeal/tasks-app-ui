@@ -6,8 +6,7 @@
     </v-toolbar>
     <v-card class="pa-5">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field v-model="firstName" :rules="firstNameRules" label="First Name" required></v-text-field>
-        <v-text-field v-model="lastName" :rules="lastNameRules" label="Last Name" required></v-text-field>
+        <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
         <v-text-field
           :type="'password'"
@@ -18,7 +17,7 @@
         ></v-text-field>
 
         <v-layout row>
-          <v-btn :disabled="!valid" color="success" @click="validate">Login</v-btn>
+          <v-btn :disabled="!valid" color="success" @click="validate">Sign Up</v-btn>
           <v-spacer></v-spacer>
           <span @click="switchForm">
             <a>Already have an account?</a>
@@ -35,12 +34,10 @@ export default {
   data() {
     return {
       valid: true,
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       password: "",
-      firstNameRules: [v => !!v || "Name is required"],
-      lastNameRules: [v => !!v || "Name is required"],
+      nameRules: [v => !!v || "Name is required"],
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
@@ -54,14 +51,17 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+        let name = this.name;
         let email = this.email;
         let password = this.password;
         axios
-          .post("users/login", {
+          .post("users", {
+            name,
             email,
             password
           })
           .then(response => {
+            console.log(response.data);
             this.setUser(response.data.user);
             this.setToken(response.data.token);
             this.$router.push("/dashboard");
