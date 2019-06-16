@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   data: () => ({
     valid: true,
@@ -44,20 +46,26 @@ export default {
     passwordRules: [v => !!v || "Password is required"],
     select: null
   }),
-
   methods: {
+    ...mapActions(["setToken", "setUser"]),
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
         let email = this.email;
         let password = this.password;
         axios
-          .post("http://localhost:3000/users/login", {
+          .post("users/login", {
             email,
             password
           })
-          .then(() => this.$router.push("/dashboard"))
-          .catch(err => console.log(err));
+          .then(response => {
+            this.setUser(response.data.user);
+            this.setToken(response.data.token);
+            this.$router.push("/dashboard");
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
     }
   }
