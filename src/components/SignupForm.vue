@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setToken", "setUser"]),
+    ...mapActions(["setToken", "setUser", "changeLoggedStatus"]),
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -61,7 +61,6 @@ export default {
             password
           })
           .then(response => {
-            console.log(response.data);
             this.setUser(response.data.user);
             this.setToken(response.data.token);
             this.$router.push("/dashboard");

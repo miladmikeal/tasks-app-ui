@@ -44,7 +44,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setToken", "setUser"]),
+    ...mapActions(["setToken", "setUser", "changeLoggedStatus"]),
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;

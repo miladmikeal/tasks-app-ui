@@ -7,7 +7,11 @@
         <span>Manager</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat color="grey">
+      <v-toolbar-title v-if="getToken" class="text-uppercase grey--text">
+        <span class="font-weight-light">Welcome</span>
+        <span>{{getUser.name}}</span>
+      </v-toolbar-title>
+      <v-btn v-if="getToken" flat color="grey">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
@@ -29,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -38,6 +43,9 @@ export default {
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" }
       ]
     };
+  },
+  computed: {
+    ...mapGetters(["getToken", "getUser"])
   }
 };
 </script>

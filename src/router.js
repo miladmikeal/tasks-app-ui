@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 import Dashboard from './views/Dashboard.vue'
 import Profile from './views/Profile.vue'
 import Login from './views/Login.vue'
@@ -18,12 +19,26 @@ export default new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        if (store.state.token) {
+          next()
+        } else {
+          next('/')
+        }
+      }
     },
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,
+      beforeEnter(to, from, next) {
+        if (store.state.token) {
+          next()
+        } else {
+          next('/')
+        }
+      }
     }
   ]
 })
