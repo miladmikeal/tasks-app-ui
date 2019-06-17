@@ -8,15 +8,19 @@
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex xs12 md2>
-          <div class="caption grey--text">Created</div>
-          <div>{{ formattedDate(task.createdAt) }}</div>
+          <div class="caption grey--text text-sm-center">Created</div>
+          <div class="text-sm-center">
+            <v-chip>{{ formattedDate(task.createdAt) }}</v-chip>
+          </div>
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex xs12 md2>
-          <div class="caption grey--text">Mark Complete</div>
-          <v-btn fab dark small color="success">
-            <v-icon dark>done</v-icon>
-          </v-btn>
+          <div class="text-sm-center">
+            <div class="caption grey--text">Mark Complete</div>
+            <v-btn fab dark small color="success">
+              <v-icon dark>done</v-icon>
+            </v-btn>
+          </div>
         </v-flex>
       </v-layout>
       <v-divider></v-divider>

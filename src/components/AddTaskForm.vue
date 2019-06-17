@@ -2,9 +2,12 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn fab color="white" dark v-on="on">
-          <v-icon color="success">add_circle</v-icon>
-        </v-btn>
+        <v-tooltip top>
+          <v-btn small fab color="white" dark v-on="on" slot="activator">
+            <v-icon color="primary">add</v-icon>
+          </v-btn>
+          <span>Add Task</span>
+        </v-tooltip>
       </template>
       <v-card>
         <v-card-title>
