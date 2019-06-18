@@ -36,12 +36,13 @@ export default {
     description: ""
   }),
   methods: {
-    ...mapActions(["fetchTasks"]),
+    ...mapActions(["fetchIncompleteTasks"]),
     addTask() {
       let description = this.description;
       axios
         .post("tasks", { description })
         .then(response => {
+          this.fetchIncompleteTasks();
           this.dialog = false;
         })
         .catch(err => console.log(err));

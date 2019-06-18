@@ -8,12 +8,14 @@ export default new Vuex.Store({
   state: {
     user: {},
     token: '',
-    tasks: []
+    incompleteTasks: [],
+    completeTasks: []
   },
   getters: {
     getUser: state => state.user,
     getToken: state => state.token,
-    getTasks: state => state.tasks
+    getIncompleteTasks: state => state.incompleteTasks,
+    getCompleteTasks: state => state.completeTasks
   },
   actions: {
     setUser: async ({ commit }, user) => {
@@ -22,9 +24,23 @@ export default new Vuex.Store({
     setToken: async ({ commit }, token) => {
       commit('setToken', token)
     },
-    fetchTasks: async ({ commit }) => {
-      const response = await axios.get('tasks');
-      commit('setTasks', response.data)
+    fetchIncompleteTasks: async ({ commit }, page = 0) => {
+      try {
+        let skip = page * 10;
+        const response = await axios.get(`tasks?completed=false&limit=10&skip=${skip}`)
+        commit('setIncompleteTasks', response.data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    fetchCompleteTasks: async ({ commit }, page = 0) => {
+      try {
+        let skip = page * 10;
+        const response = await axios.get(`tasks?completed=true&limit=10&skip=${skip}`)
+        commit('setCompleteTasks', response.data)
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   mutations: {
@@ -34,8 +50,11 @@ export default new Vuex.Store({
     setToken: (state, token) => {
       state.token = token
     },
-    setTasks: (state, tasks) => {
-      state.tasks = tasks
+    setIncompleteTasks: (state, tasks) => {
+      state.incompleteTasks = tasks
+    },
+    setCompleteTasks: (state, tasks) => {
+      state.completeTasks = tasks
     }
   }
 })

@@ -6,7 +6,8 @@
       <add-task-form></add-task-form>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat>View Completed</v-btn>
+        <v-btn v-if="taskList === true" @click="getCompleted" flat>View Completed</v-btn>
+        <v-btn v-else @click="getIncomplete" flat>View Incomplete</v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </v-container>
@@ -15,8 +16,23 @@
 <script>
 import AddTaskForm from "../components/AddTaskForm";
 export default {
+  data() {
+    return {
+      taskList: true
+    };
+  },
   components: {
     AddTaskForm
+  },
+  methods: {
+    getIncomplete() {
+      this.$emit("switchTaskList", "TaskListIncomplete");
+      this.taskList = true;
+    },
+    getCompleted() {
+      this.$emit("switchTaskList", "TaskListComplete");
+      this.taskList = false;
+    }
   }
 };
 </script>
