@@ -7,7 +7,9 @@ import store from '../store';
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = '';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.headers.post['Content-Type'] = 'application/json';
+// axios.defaults.headers.common['Accept'] = 'application/json';
+// axios.defaults.headers.common['X-Requested-With'] = 'XmlHttpRequest';
 
 let config = {
   baseURL: "http://localhost:3000/",
@@ -38,6 +40,11 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function (response) {
     // Do something with response data
+    // let token = store.getters.getToken;
+
+    // if (token) {
+    //   response.headers = "application/json"
+    // }
     return response;
   },
   function (error) {
