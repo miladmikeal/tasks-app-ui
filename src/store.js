@@ -8,12 +8,14 @@ export default new Vuex.Store({
   state: {
     user: {},
     token: '',
+    avatar: '/avatar.png',
     incompleteTasks: [],
     completeTasks: []
   },
   getters: {
     getUser: state => state.user,
     getToken: state => state.token,
+    getAvatar: state => state.avatar,
     getIncompleteTasks: state => state.incompleteTasks,
     getCompleteTasks: state => state.completeTasks
   },
@@ -24,6 +26,21 @@ export default new Vuex.Store({
     setToken: async ({ commit }, token) => {
       commit('setToken', token)
     },
+    // fetchAvatar: async ({ commit, state }) => {
+    //   try {
+    //     let userId = state.user._id;
+    //     console.log(userId)
+    //     const response = await axios.get(`users/${userId}/avatar`)
+    //     console.log(response.data)
+    //     if (response.status === 404) {
+    //       commit('setAvatar', '/avatar.png')
+    //     } else {
+    //       commit('setAvatar', response.data)
+    //     }
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
     fetchIncompleteTasks: async ({ commit }, page = 0) => {
       try {
         let skip = page * 10;
@@ -49,6 +66,9 @@ export default new Vuex.Store({
     },
     setToken: (state, token) => {
       state.token = token
+    },
+    setAvatar: (state, avatar) => {
+      state.avatar = avatar
     },
     setIncompleteTasks: (state, tasks) => {
       state.incompleteTasks = tasks

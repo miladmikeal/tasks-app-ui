@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-0 pt-0">
-    <v-card flat v-for="task in getCompleteTasks" :key="task.id">
+    <v-card flat v-for="task in getIncompleteTasks" :key="task.id">
       <v-layout row wrap class="pa-3">
         <v-flex xs12 md6>
           <div class="caption grey--text">Task:</div>
@@ -25,7 +25,7 @@
         <v-flex xs12 md2>
           <div class="text-sm-center">
             <div class="caption grey--text">Mark Complete</div>
-            <v-btn @click="markIncomplete(task._id)" fab dark small color="success">
+            <v-btn @click="markComplete(task._id)" fab dark small color="success">
               <v-icon dark>done</v-icon>
             </v-btn>
           </div>
@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import moment from "moment";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -46,9 +46,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getCompleteTasks"])
+    ...mapGetters(["getIncompleteTasks"])
   },
   methods: {
+    ...mapActions(["fetchIncompleteTasks"]),
     formattedDate(date) {
       date = date
         .split("")
@@ -56,9 +57,9 @@ export default {
         .join("");
       return moment(date).format("MM-DD-YYYY");
     },
-    markIncoomplete(id) {
-      console.log(id);
-      axios.patch(`tasks/${id}`, { completed: false });
+    markComplete(id) {
+      axios.patch(`tasks/${id}`, { completed: true });
+      this.fetchIncompleteTasks();
     }
   }
 };

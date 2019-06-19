@@ -12,10 +12,10 @@
       </v-toolbar-items>
     </v-toolbar>
   </v-container>
-</template>
+</template> 
 
 <script>
-import AddTaskForm from "../components/AddTaskForm";
+import AddTaskForm from "./AddTaskForm";
 export default {
   data() {
     return {

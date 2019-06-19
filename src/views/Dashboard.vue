@@ -4,14 +4,18 @@
     <transition name="fade-transition" mode="out-in">
       <component :is="selectedComponent"></component>
     </transition>
+    <v-avatar>
+      <img :src="getAvatar">
+    </v-avatar>
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import TaskListIncomplete from "../components/TaskListIncomplete";
-import TaskListComplete from "../components/TaskListComplete";
-import TaskListToolbar from "../components/TaskListToolbar";
+import TaskListIncomplete from "../components/tasks/TaskListIncomplete";
+import TaskListComplete from "../components/tasks/TaskListComplete";
+import TaskListToolbar from "../components/tasks/TaskListToolbar";
+import Pagination from "../components/tasks/Pagination";
 export default {
   data() {
     return {
@@ -21,7 +25,8 @@ export default {
   components: {
     TaskListIncomplete,
     TaskListComplete,
-    TaskListToolbar
+    TaskListToolbar,
+    Pagination
   },
   computed: {
     ...mapGetters(["getIncompleteTasks", "getCompleteTasks"])

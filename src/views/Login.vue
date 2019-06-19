@@ -17,8 +17,8 @@
 
 <script>
 import "../plugins/axios";
-import LoginForm from "../components/LoginForm";
-import SignupForm from "../components/SignupForm";
+import LoginForm from "../components/user/LoginForm";
+import SignupForm from "../components/user/SignupForm";
 export default {
   data() {
     return {
