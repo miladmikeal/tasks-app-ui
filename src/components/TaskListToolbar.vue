@@ -1,7 +1,8 @@
 <template>
   <v-container class="mb-0 pb-0">
     <v-toolbar dark color="primary">
-      <v-toolbar-title>Incomplete Tasks</v-toolbar-title>
+      <v-toolbar-title v-if="taskList === true">Incomplete Tasks</v-toolbar-title>
+      <v-toolbar-title v-else>Complete Tasks</v-toolbar-title>
       <v-spacer></v-spacer>
       <add-task-form></add-task-form>
       <v-spacer></v-spacer>

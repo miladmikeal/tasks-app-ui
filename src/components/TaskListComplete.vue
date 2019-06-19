@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import moment from "moment";
 export default {
   data() {
@@ -45,14 +45,10 @@ export default {
       moment
     };
   },
-  created() {
-    this.fetchCompleteTasks();
-  },
   computed: {
     ...mapGetters(["getCompleteTasks"])
   },
   methods: {
-    ...mapActions(["fetchCompleteTasks"]),
     formattedDate(date) {
       date = date
         .split("")

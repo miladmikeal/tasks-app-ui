@@ -38,21 +38,17 @@
 
 <script>
 import moment from "moment";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       moment
     };
   },
-  created() {
-    this.fetchIncompleteTasks;
-  },
   computed: {
     ...mapGetters(["getIncompleteTasks"])
   },
   methods: {
-    ...mapActions(["fetchIncompleteTasks"]),
     formattedDate(date) {
       date = date
         .split("")
@@ -61,8 +57,8 @@ export default {
       return moment(date).format("MM-DD-YYYY");
     },
     markComplete(id) {
-      console.log(id);
       axios.patch(`tasks/${id}`, { completed: true });
+      this.fetchIncompleteTasks();
     }
   }
 };
