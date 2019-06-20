@@ -57,9 +57,9 @@ export default {
         .join("");
       return moment(date).format("MM-DD-YYYY");
     },
-    markComplete(id) {
-      axios.patch(`tasks/${id}`, { completed: true });
-      this.fetchIncompleteTasks();
+    async markComplete(id) {
+      await axios.patch(`tasks/${id}`, { completed: true });
+      await this.fetchIncompleteTasks();
     },
     async deleteItem(taskId) {
       await this.deleteTask(taskId);

@@ -6,15 +6,6 @@
           <div class="caption grey--text">Task:</div>
           <div>{{task.description}}</div>
         </v-flex>
-        <v-flex xs12 md1 class="text-sm-center">
-          <div class="caption grey--text">Edit</div>
-          <v-icon small class="mt-2" @click="editItem(task)">edit</v-icon>
-        </v-flex>
-        <v-flex xs12 md1 class="text-sm-center">
-          <div class="caption grey--text">Delete</div>
-          <v-icon small class="mt-2" @click="deleteItem(task)">delete</v-icon>
-        </v-flex>
-        <v-spacer></v-spacer>
         <v-flex xs12 md2>
           <div class="caption grey--text text-sm-center">Created</div>
           <div class="text-sm-center">
@@ -23,10 +14,17 @@
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex xs12 md2>
+          <div class="caption grey--text text-sm-center">Completed</div>
+          <div class="text-sm-center">
+            <v-chip>{{ formattedDate(task.updatedAt) }}</v-chip>
+          </div>
+        </v-flex>
+        <v-spacer></v-spacer>
+        <v-flex xs12 md2>
           <div class="text-sm-center">
             <div class="caption grey--text">Mark Incomplete</div>
-            <v-btn @click="markIncomplete(task._id)" fab dark small color="success">
-              <v-icon dark>done</v-icon>
+            <v-btn @click="markIncomplete(task._id)" fab dark small color="error">
+              <v-icon dark>undo</v-icon>
             </v-btn>
           </div>
         </v-flex>
@@ -37,7 +35,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 export default {
   data() {
@@ -49,6 +47,7 @@ export default {
     ...mapGetters(["getCompleteTasks"])
   },
   methods: {
+    ...mapActions(["fetchCompleteTasks"]),
     formattedDate(date) {
       date = date
         .split("")
@@ -56,9 +55,9 @@ export default {
         .join("");
       return moment(date).format("MM-DD-YYYY");
     },
-    markIncoomplete(id) {
-      console.log(id);
-      axios.patch(`tasks/${id}`, { completed: false });
+    async markIncomplete(id) {
+      await axios.patch(`tasks/${id}`, { completed: false });
+      await this.fetchCompleteTasks();
     }
   }
 };
