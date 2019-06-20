@@ -44,6 +44,7 @@ export default {
         .then(response => {
           this.fetchIncompleteTasks();
           this.dialog = false;
+          this.description = "";
         })
         .catch(err => console.log(err));
     }
