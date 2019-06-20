@@ -43,11 +43,20 @@ export default {
       moment
     };
   },
+  bforeCreate() {
+    let tasks = this.getCompleteTasks;
+    tasks.forEach(task => {
+      let date = new Date(task.updatedAt);
+      if (Date.now() - date >= 604800000) {
+        this.deleteTask(task._id);
+      }
+    });
+  },
   computed: {
     ...mapGetters(["getCompleteTasks"])
   },
   methods: {
-    ...mapActions(["fetchCompleteTasks"]),
+    ...mapActions(["fetchCompleteTasks", "deleteTask"]),
     formattedDate(date) {
       date = date
         .split("")

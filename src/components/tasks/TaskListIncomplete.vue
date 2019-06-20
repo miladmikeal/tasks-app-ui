@@ -18,7 +18,7 @@
         <v-flex xs12 md2>
           <div class="caption grey--text text-sm-center">Created</div>
           <div class="text-sm-center">
-            <v-chip :class="`${dueDate(task)}`">{{ formattedDate(task.createdAt) }}</v-chip>
+            <v-chip :class="`${dueDate(task)} white--text`">{{ formattedDate(task.createdAt) }}</v-chip>
           </div>
         </v-flex>
         <v-spacer></v-spacer>
@@ -81,15 +81,27 @@ export default {
 </script>
 
 <style scoped>
-.day {
+.v-card.day {
   border-left: 4px solid lime;
 }
 
-.week {
-  border-left: 4px solid yellow;
+.v-card.week {
+  border-left: 4px solid orange;
 }
 
-.over {
-  border-left: 4px solid red;
+.v-card.over {
+  border-left: 4px solid tomato;
+}
+
+.v-chip.day {
+  background: lime;
+}
+
+.v-chip.week {
+  background: orange;
+}
+
+.v-chip.over {
+  background: tomato;
 }
 </style>
