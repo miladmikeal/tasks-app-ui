@@ -12,7 +12,7 @@
         </v-flex>
         <v-flex xs12 md1 class="text-sm-center">
           <div class="caption grey--text">Delete</div>
-          <v-icon small class="mt-2" @click="deleteItem(props.item)">delete</v-icon>
+          <v-icon small class="mt-2" @click="deleteItem(task._id)">delete</v-icon>
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex xs12 md2>
@@ -49,7 +49,7 @@ export default {
     ...mapGetters(["getIncompleteTasks"])
   },
   methods: {
-    ...mapActions(["fetchIncompleteTasks"]),
+    ...mapActions(["fetchIncompleteTasks", "deleteTask"]),
     formattedDate(date) {
       date = date
         .split("")
@@ -60,6 +60,10 @@ export default {
     markComplete(id) {
       axios.patch(`tasks/${id}`, { completed: true });
       this.fetchIncompleteTasks();
+    },
+    async deleteItem(taskId) {
+      await this.deleteTask(taskId);
+      await this.fetchIncompleteTasks();
     }
   }
 };

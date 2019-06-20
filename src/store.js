@@ -43,8 +43,8 @@ export default new Vuex.Store({
     // },
     fetchIncompleteTasks: async ({ commit }, page = 0) => {
       try {
-        let skip = page * 10;
-        const response = await axios.get(`tasks?completed=false&limit=10&skip=${skip}`)
+        let skip = page * 100;
+        const response = await axios.get(`tasks?completed=false&limit=100&skip=${skip}`)
         commit('setIncompleteTasks', response.data)
       } catch (err) {
         console.log(err)
@@ -52,12 +52,21 @@ export default new Vuex.Store({
     },
     fetchCompleteTasks: async ({ commit }, page = 0) => {
       try {
-        let skip = page * 10;
-        const response = await axios.get(`tasks?completed=true&limit=10&skip=${skip}`)
-        commit('setCompleteTasks', response.data)
+        let skip = page * 100;
+        const response = await axios.get(`tasks?completed=true&limit=100&skip=${skip}`)
+        let reverse = (response.data).reverse()
+        commit('setCompleteTasks', reverse)
       } catch (err) {
         console.log(err)
       }
+    },
+    deleteTask: async ({ commit, state }, taskId) => {
+      await axios.delete(`tasks/${taskId}`);
+      let tasks = state.incompleteTasks;
+      tasks.filter(task => {
+        return task.id !== taskId
+      });
+      commit('deleteTask', tasks);
     }
   },
   mutations: {
@@ -75,6 +84,9 @@ export default new Vuex.Store({
     },
     setCompleteTasks: (state, tasks) => {
       state.completeTasks = tasks
+    },
+    deleteTask: (state, tasks) => {
+      state.incompleteTasks = tasks
     }
   }
 })

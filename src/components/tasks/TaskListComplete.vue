@@ -8,11 +8,11 @@
         </v-flex>
         <v-flex xs12 md1 class="text-sm-center">
           <div class="caption grey--text">Edit</div>
-          <v-icon small class="mt-2" @click="editItem(props.item)">edit</v-icon>
+          <v-icon small class="mt-2" @click="editItem(task)">edit</v-icon>
         </v-flex>
         <v-flex xs12 md1 class="text-sm-center">
           <div class="caption grey--text">Delete</div>
-          <v-icon small class="mt-2" @click="deleteItem(props.item)">delete</v-icon>
+          <v-icon small class="mt-2" @click="deleteItem(task)">delete</v-icon>
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex xs12 md2>

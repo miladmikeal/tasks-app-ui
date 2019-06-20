@@ -4,9 +4,6 @@
     <transition name="fade-transition" mode="out-in">
       <component :is="selectedComponent"></component>
     </transition>
-    <v-avatar>
-      <img :src="getAvatar">
-    </v-avatar>
   </v-container>
 </template>
 
@@ -15,7 +12,6 @@ import { mapGetters, mapActions } from "vuex";
 import TaskListIncomplete from "../components/tasks/TaskListIncomplete";
 import TaskListComplete from "../components/tasks/TaskListComplete";
 import TaskListToolbar from "../components/tasks/TaskListToolbar";
-import Pagination from "../components/tasks/Pagination";
 export default {
   data() {
     return {
@@ -25,8 +21,7 @@ export default {
   components: {
     TaskListIncomplete,
     TaskListComplete,
-    TaskListToolbar,
-    Pagination
+    TaskListToolbar
   },
   computed: {
     ...mapGetters(["getIncompleteTasks", "getCompleteTasks"])
@@ -34,7 +29,6 @@ export default {
   methods: {
     ...mapActions(["fetchIncompleteTasks", "fetchCompleteTasks"]),
     changeTasks(tasks) {
-      console.log("ChangeTasks hit");
       if (tasks === "TaskListIncomplete") {
         this.fetchIncompleteTasks();
         this.selectedComponent = tasks;
