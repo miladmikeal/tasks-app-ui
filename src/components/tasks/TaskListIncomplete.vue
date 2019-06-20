@@ -28,7 +28,7 @@
                 >{{ formattedDate(task.createdAt) }}</v-chip>
               </div>
             </template>
-            <span v-if="dueDate(task) === 'over'">Over 1 Week Old</span>
+            <span v-if="dueDate(task) === 'over'">More Than Week Old</span>
             <span v-else-if="dueDate(task) === 'week'">Less Than Week Old</span>
             <span v-else>Less Than Day Old</span>
           </v-tooltip>
