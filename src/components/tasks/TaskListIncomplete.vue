@@ -17,9 +17,21 @@
         <v-spacer></v-spacer>
         <v-flex xs12 md2>
           <div class="caption grey--text text-sm-center">Created</div>
-          <div class="text-sm-center">
-            <v-chip :class="`${dueDate(task)} white--text`">{{ formattedDate(task.createdAt) }}</v-chip>
-          </div>
+
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <div class="text-sm-center">
+                <v-chip
+                  v-on="on"
+                  slot="activator"
+                  :class="`${dueDate(task)} white--text`"
+                >{{ formattedDate(task.createdAt) }}</v-chip>
+              </div>
+            </template>
+            <span v-if="dueDate(task) === 'over'">Over 1 Week Old</span>
+            <span v-else-if="dueDate(task) === 'week'">Less Than Week Old</span>
+            <span v-else>Less Than Day Old</span>
+          </v-tooltip>
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex xs12 md2>
