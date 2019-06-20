@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-0 pt-0">
-    <v-card flat v-for="task in getIncompleteTasks" :key="task.id">
+    <v-card flat v-for="task in getIncompleteTasks" :key="task.id" :class="`${dueDate(task)}`">
       <v-layout row wrap class="pa-3">
         <v-flex xs12 md6>
           <div class="caption grey--text">Task:</div>
@@ -18,7 +18,7 @@
         <v-flex xs12 md2>
           <div class="caption grey--text text-sm-center">Created</div>
           <div class="text-sm-center">
-            <v-chip>{{ formattedDate(task.createdAt) }}</v-chip>
+            <v-chip :class="`${dueDate(task)}`">{{ formattedDate(task.createdAt) }}</v-chip>
           </div>
         </v-flex>
         <v-spacer></v-spacer>
@@ -57,6 +57,17 @@ export default {
         .join("");
       return moment(date).format("MM-DD-YYYY");
     },
+    dueDate(task) {
+      let date = new Date(task.createdAt);
+      let diff = Date.now() - date;
+      if (diff <= 86400000) {
+        return "day";
+      } else if (diff <= 604800000) {
+        return "week";
+      } else {
+        return "over";
+      }
+    },
     async markComplete(id) {
       await axios.patch(`tasks/${id}`, { completed: true });
       await this.fetchIncompleteTasks();
@@ -69,5 +80,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.day {
+  border-left: 4px solid lime;
+}
+
+.week {
+  border-left: 4px solid yellow;
+}
+
+.over {
+  border-left: 4px solid red;
+}
 </style>
