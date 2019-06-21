@@ -3,15 +3,13 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
         <v-tooltip top>
-          <v-btn small fab color="white" dark v-on="on" slot="activator">
-            <v-icon color="primary">add</v-icon>
-          </v-btn>
-          <span>Add Task</span>
+          <v-icon small class="mt-2" v-on="on" slot="activator">edit</v-icon>
+          <span>Edit Task</span>
         </v-tooltip>
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Add Task</span>
+          <span class="headline">Edit Task</span>
         </v-card-title>
         <v-card-text>
           <v-form>
@@ -35,14 +33,24 @@ export default {
     dialog: false,
     description: ""
   }),
+  created() {
+    this.description = this.$props.task.description;
+  },
+  props: ["task"],
   methods: {
-    ...mapActions(["fetchIncompleteTasks", "addTask"]),
+    ...mapActions(["fetchIncompleteTasks"]),
     async saveTask() {
+      console.log(this.$props.task.description);
       let description = this.description;
-      await this.addTask(description);
-      await this.fetchIncompleteTasks();
-      this.dialog = false;
-      this.description = "";
+      let taskId = this.$props.task._id;
+      try {
+        await axios.patch(`tasks/${taskId}`, { description });
+        await this.fetchIncompleteTasks();
+        this.dialog = false;
+        this.description = "";
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };

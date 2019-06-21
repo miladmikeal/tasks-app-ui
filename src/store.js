@@ -60,6 +60,23 @@ export default new Vuex.Store({
         console.log(err)
       }
     },
+    addTask: async ({ commit }, description) => {
+      try {
+        await axios.post("tasks", { description });
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    editTask: async ({ commit, state }, taskId, description) => {
+      let tasks = state.incompleteTasks;
+      console.log("store", taskId)
+      try {
+        await axios.patch(`tasks/${taskId}`, { description })
+        console.log("reached")
+      } catch (err) {
+        console.log(err)
+      }
+    },
     deleteTask: async ({ commit, state }, taskId) => {
       await axios.delete(`tasks/${taskId}`);
       let tasks = state.incompleteTasks;

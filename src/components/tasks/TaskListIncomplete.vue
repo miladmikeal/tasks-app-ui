@@ -8,7 +8,7 @@
         </v-flex>
         <v-flex xs12 md1 class="text-sm-center">
           <div class="caption grey--text">Edit</div>
-          <v-icon small class="mt-2" @click="editItem(props.item)">edit</v-icon>
+          <edit-task-form :task="task"></edit-task-form>
         </v-flex>
         <v-flex xs12 md1 class="text-sm-center">
           <div class="caption grey--text">Delete</div>
@@ -51,11 +51,15 @@
 <script>
 import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
+import EditTaskForm from "./EditTaskForm";
 export default {
   data() {
     return {
       moment
     };
+  },
+  components: {
+    EditTaskForm
   },
   computed: {
     ...mapGetters(["getIncompleteTasks"])
