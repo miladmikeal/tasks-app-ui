@@ -40,7 +40,6 @@ export default {
   methods: {
     ...mapActions(["fetchIncompleteTasks"]),
     async saveTask() {
-      console.log(this.$props.task.description);
       let description = this.description;
       let taskId = this.$props.task._id;
       try {
