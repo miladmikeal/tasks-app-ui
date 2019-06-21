@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-tooltip top>
+        <v-tooltip bottom>
           <v-icon small class="mt-2" v-on="on" slot="activator">edit</v-icon>
           <span>Edit Task</span>
         </v-tooltip>

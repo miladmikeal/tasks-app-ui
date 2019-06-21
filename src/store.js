@@ -85,9 +85,13 @@ export default new Vuex.Store({
       });
       commit('deleteTask', tasks);
     },
-    signOut: ({ commit }) => {
-      axios.post('users/logout')
-      commit('signOut')
+    signOut: async ({ commit }) => {
+      try {
+        await axios.post('users/logout')
+        commit('signOut')
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   mutations: {
