@@ -11,7 +11,7 @@
         <span class="font-weight-light">Welcome</span>
         <span>{{getUser.name}}</span>
       </v-toolbar-title>
-      <v-btn v-if="getToken" flat color="grey">
+      <v-btn v-if="getToken" @click="logout()" flat color="grey">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -54,6 +54,13 @@ export default {
   },
   computed: {
     ...mapGetters(["getToken", "getUser"])
+  },
+  methods: {
+    ...mapActions(["signOut"]),
+    async logout() {
+      await this.signOut();
+      await this.$router.push("/");
+    }
   }
 };
 </script>

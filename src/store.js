@@ -67,6 +67,10 @@ export default new Vuex.Store({
         return task.id !== taskId
       });
       commit('deleteTask', tasks);
+    },
+    signOut: ({ commit }) => {
+      axios.post('users/logout')
+      commit('signOut')
     }
   },
   mutations: {
@@ -87,6 +91,10 @@ export default new Vuex.Store({
     },
     deleteTask: (state, tasks) => {
       state.incompleteTasks = tasks
+    },
+    signOut: (state, user) => {
+      state.user = {};
+      state.token = '';
     }
   }
 })
