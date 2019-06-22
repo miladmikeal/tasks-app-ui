@@ -1,5 +1,10 @@
 # task-manager-client
 
+https://mikeal-tasks-manager.herokuapp.com/
+
+Stack: Vue.js, Express.js, Node.js, MongoDB
+
+
 ## Project setup
 ```
 npm install
