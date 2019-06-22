@@ -12,7 +12,7 @@ import store from '../store';
 // axios.defaults.headers.common['X-Requested-With'] = 'XmlHttpRequest';
 
 let config = {
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://mikeal-tasks-manager.herokuapp.com/",
   timeout: 60 * 1000, // Timeout
   withCredentials: false, // Check cross-site Access-Control
 };

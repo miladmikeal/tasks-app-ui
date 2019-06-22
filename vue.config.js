@@ -1,9 +1,5 @@
+const path = require('path');
+
 module.exports = {
-  pluginOptions: {
-    moment: {
-      locales: [
-        ''
-      ]
-    }
-  }
+  outputDir: path.resolve(__dirname, '../task-manager-server/src/public')
 }
