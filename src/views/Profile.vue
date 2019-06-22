@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <profile-dashboard></profile-dashboard>
+    <profile-dashboard class="mt-5"></profile-dashboard>
   </v-container>
 </template>
 
