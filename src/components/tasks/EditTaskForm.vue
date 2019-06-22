@@ -38,12 +38,14 @@ export default {
   },
   props: ["task"],
   methods: {
-    ...mapActions(["fetchIncompleteTasks"]),
+    ...mapActions(["fetchIncompleteTasks", "editTask"]),
     async saveTask() {
-      let description = this.description;
-      let taskId = this.$props.task._id;
+      let task = {
+        description: this.description,
+        id: this.$props.task._id
+      };
       try {
-        await axios.patch(`tasks/${taskId}`, { description });
+        await this.editTask(task);
         await this.fetchIncompleteTasks();
         this.dialog = false;
         this.description = "";

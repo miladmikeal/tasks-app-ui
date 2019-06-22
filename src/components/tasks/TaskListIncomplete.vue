@@ -67,11 +67,15 @@ export default {
   methods: {
     ...mapActions(["fetchIncompleteTasks", "deleteTask"]),
     formattedDate(date) {
-      date = date
-        .split("")
-        .splice(0, 10)
-        .join("");
-      return moment(date).format("MM-DD-YYYY");
+      if ((date = moment(date).format("MM-DD-YYYY"))) {
+        return date;
+      } else {
+        date = date
+          .split("")
+          .splice(0, 10)
+          .join("");
+        return moment(date).format("MM-DD-YYYY");
+      }
     },
     dueDate(task) {
       let date = new Date(task.createdAt);
