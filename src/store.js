@@ -23,6 +23,14 @@ export default new Vuex.Store({
     setUser: async ({ commit }, user) => {
       commit('setUser', user)
     },
+    updateUser: async ({ commit }, user) => {
+      try {
+        await axios.patch("users/me", user)
+        commit("setUser", user)
+      } catch (err) {
+        console.log(err)
+      }
+    },
     setToken: async ({ commit }, token) => {
       commit('setToken', token)
     },

@@ -1,11 +1,16 @@
 <template>
   <v-container>
-    <h1>Profile</h1>
+    <profile-dashboard></profile-dashboard>
   </v-container>
 </template>
 
 <script>
-export default {};
+import ProfileDashboard from "../components/user/ProfileDashboard";
+export default {
+  components: {
+    ProfileDashboard
+  }
+};
 </script>
 
 <style>
