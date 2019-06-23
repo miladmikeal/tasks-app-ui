@@ -7,8 +7,14 @@
       <add-task-form></add-task-form>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn v-if="taskList === true" @click="getCompleted" flat>View Completed</v-btn>
-        <v-btn v-else @click="getIncomplete" flat>View Incomplete</v-btn>
+        <v-btn v-if="taskList === true" @click="getCompleted" flat>
+          <span>View Completed</span>
+          <v-icon right>exit_to_app</v-icon>
+        </v-btn>
+        <v-btn v-else @click="getIncomplete" flat>
+          <span>View Incomplete</span>
+          <v-icon right>exit_to_app</v-icon>
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </v-container>

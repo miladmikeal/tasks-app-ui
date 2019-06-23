@@ -8,8 +8,8 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title v-if="getToken" class="text-uppercase grey--text">
-        <span class="font-weight-light">Welcome</span>
-        <span>{{getUser.name}}</span>
+        <!-- <span class="font-weight-light">Welcome</span> -->
+        <span>Welcome, {{getUser.name}}</span>
       </v-toolbar-title>
       <v-btn v-if="getToken" @click="logout()" flat color="grey">
         <span>Sign Out</span>

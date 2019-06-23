@@ -17,7 +17,7 @@
         ></v-text-field>
 
         <v-layout row>
-          <v-btn :disabled="!valid" color="success" @click="validate">Sign Up</v-btn>
+          <v-btn :disabled="!valid" color="info" @click="validate">Sign Up</v-btn>
           <v-spacer></v-spacer>
           <span @click="switchForm">
             <a>Already have an account?</a>

@@ -102,7 +102,7 @@ export default {
 
 <style scoped>
 .v-card.day {
-  border-left: 4px solid lime;
+  border-left: 4px solid lightgreen;
 }
 
 .v-card.week {
@@ -114,7 +114,7 @@ export default {
 }
 
 .v-chip.day {
-  background: lime;
+  background: lightgreen;
 }
 
 .v-chip.week {
