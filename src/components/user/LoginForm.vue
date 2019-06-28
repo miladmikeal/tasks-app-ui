@@ -5,7 +5,7 @@
       <v-toolbar-title>Login</v-toolbar-title>
     </v-toolbar>
     <v-card class="pa-5">
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form ref="form" @submit.prevent="validate" v-model="valid" lazy-validation>
         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
         <v-text-field
           :type="'password'"
@@ -16,7 +16,7 @@
         ></v-text-field>
 
         <v-layout row>
-          <v-btn :disabled="!valid" color="info" @submit="validate">Login</v-btn>
+          <v-btn type="submit" :disabled="!valid" color="info">Login</v-btn>
           <v-spacer></v-spacer>
           <span @click="switchForm">
             <a>Need an account?</a>

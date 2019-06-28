@@ -1,9 +1,8 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-icon small class="mt-2" v-on="on" slot="activator">edit</v-icon>
+      <v-icon small class="mt-2" slot="activator">edit</v-icon>
       <span>Edit Task</span>
-
       <v-card>
         <v-card-title>
           <span class="headline">Edit Task</span>

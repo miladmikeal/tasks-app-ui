@@ -5,7 +5,7 @@
       <v-toolbar-title>Sign Up</v-toolbar-title>
     </v-toolbar>
     <v-card class="pa-5">
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form @submit.prevent="validate" ref="form" v-model="valid" lazy-validation>
         <v-text-field v-model="name" :rules="nameRules" label="Name" required></v-text-field>
         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
         <v-text-field
@@ -17,7 +17,7 @@
         ></v-text-field>
 
         <v-layout row>
-          <v-btn :disabled="!valid" color="info" @submit="validate">Sign Up</v-btn>
+          <v-btn type="submit" :disabled="!valid" color="info">Sign Up</v-btn>
           <v-spacer></v-spacer>
           <span @click="switchForm">
             <a>Already have an account?</a>
